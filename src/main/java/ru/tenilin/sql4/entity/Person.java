@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Persons {
+public class Person {
 
     @EmbeddedId
     private NameSurnameAge nameSurnameAge;

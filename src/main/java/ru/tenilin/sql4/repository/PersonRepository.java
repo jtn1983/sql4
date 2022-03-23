@@ -5,20 +5,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.tenilin.sql4.entity.NameSurnameAge;
-import ru.tenilin.sql4.entity.Persons;
+import ru.tenilin.sql4.entity.Person;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonRepository extends JpaRepository<Persons, NameSurnameAge> {
-    List<Persons> findByCityOfLiving(String cityOfLiving);
+@Repository
+public interface PersonRepository extends JpaRepository<Person, NameSurnameAge> {
+    List<Person> findByCityOfLiving(String cityOfLiving);
 
-    List<Persons> findByNameSurnameAge_AgeLessThanOrderByNameSurnameAge_AgeAsc(int age);
+    List<Person> findByNameSurnameAge_AgeLessThanOrderByNameSurnameAge_AgeAsc(int age);
 
-    @Query("SELECT c FROM Persons c WHERE " +
+    @Query("SELECT c FROM Person c WHERE " +
             "(:name is null or c.nameSurnameAge.name = :name) " +
             "and :surname is null or c.nameSurnameAge.surname = :surname")
-    List<Persons> findByNameSurname(
+    List<Person> findByNameSurname(
             @Param("name") Optional<String> name,
             @Param("surname") Optional<String> surname);
 }
